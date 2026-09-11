@@ -193,13 +193,13 @@
         "en": "Project fee schedule"
       },
       "body": {
-        "zh": "專案費用依人選首年薪資總額（含底薪、獎金估值、固定津貼）以階梯費率計算。人選到職當日才開立請款單，於收到通知後 30 日內付款。",
-        "en": "The project fee is calculated on the candidate's first-year total compensation (base salary, bonus estimate and fixed allowances) at tiered rates. The invoice is issued only on the day the candidate starts, payable within 30 days."
+        "zh": "專案費用依人選首年薪資總額（含底薪、獎金估值、固定津貼）以階梯費率計算。人選到職當日才開立請款單，於收到通知後 30 日內付款。下表為示範用參考費率，級距與費率可依個案調整，以雙方合約為準。",
+        "en": "The project fee is calculated on the candidate's first-year total compensation (base salary, bonus estimate and fixed allowances) at tiered rates. The invoice is issued only on the day the candidate starts, payable within 30 days. The schedule below is a sample for reference — tiers and rates are adjustable and finalised in each engagement's agreement."
       },
       "columns": [
         {
-          "zh": "首年薪資總額 (TWD)",
-          "en": "First-year compensation (TWD)"
+          "zh": "首年薪資總額",
+          "en": "First-year compensation"
         },
         {
           "zh": "專案費率",
