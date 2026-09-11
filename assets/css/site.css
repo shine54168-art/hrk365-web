@@ -259,6 +259,16 @@ thead th{background:var(--bg-soft);color:var(--ink);font-weight:700;font-size:.8
 tbody tr:last-child td{border-bottom:none}
 td:first-child{font-weight:600;color:var(--ink)}
 
+/* collapsible fee schedule */
+.feedetails{margin-top:6px}
+.feedetails__toggle{display:inline-flex;align-items:center;gap:9px;list-style:none;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:600;font-size:.92rem;border-radius:99px;padding:.6rem 1.35rem;transition:all .25s;user-select:none}
+.feedetails__toggle::-webkit-details-marker{display:none}
+.feedetails__toggle::marker{content:""}
+.feedetails__toggle:hover{border-color:var(--brand-600);color:var(--brand-600)}
+.feedetails__chev{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.feedetails[open] .feedetails__chev{transform:rotate(180deg)}
+.feedetails__body{margin-top:16px}
+
 /* ---------- quote ---------- */
 .quote{
   background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);
