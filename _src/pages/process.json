@@ -1,0 +1,289 @@
+{
+  "slug": "process",
+  "title": {
+    "zh": "合作流程｜從需求訪談到專案結案 | HiReKing",
+    "en": "How We Work Together | Engagement Process | HiReKing"
+  },
+  "desc": {
+    "zh": "HiReKing 的五步合作流程：需求訪談、職缺對焦（PPC）、人才尋訪、合作條件討論與專案啟動。階梯式專案費率，人選到職後才請款。",
+    "en": "HiReKing's five-step engagement: discovery, Position Check (PPC), talent search, commercial agreement and project kick-off. Tiered project fees, invoiced only after the candidate starts."
+  },
+  "blocks": [
+    {
+      "type": "pagehero",
+      "crumbs": [
+        {
+          "label": {
+            "zh": "合作流程",
+            "en": "Process"
+          }
+        }
+      ],
+      "eyebrow": {
+        "zh": "合作流程",
+        "en": "How we engage"
+      },
+      "title": {
+        "zh": "從第一通電話到人選報到",
+        "en": "From the first call to a signed close"
+      },
+      "sub": {
+        "zh": "五個步驟，每一步的產出都寫得清楚。人才尋訪與合作條件討論可以並行，不浪費你的時間。",
+        "en": "Five steps, each with a defined output. Search and commercial discussion run in parallel, so no calendar time is wasted waiting for paperwork."
+      }
+    },
+    {
+      "type": "flow",
+      "eyebrow": {
+        "zh": "五個步驟",
+        "en": "The five steps"
+      },
+      "title": {
+        "zh": "我們怎麼跟你合作",
+        "en": "How an engagement runs"
+      },
+      "body": {
+        "zh": "點選任一步驟查看細節；第三與第四步並行進行。",
+        "en": "Click any step to see what happens there. Steps three and four run in parallel."
+      },
+      "parallel": [
+        2,
+        3
+      ],
+      "items": [
+        {
+          "label": {
+            "zh": "了解需求",
+            "en": "Discovery"
+          },
+          "title": {
+            "zh": "了解需求",
+            "en": "Discovery"
+          },
+          "body": {
+            "zh": "先聽你說：業務現況、團隊組成、這個職位為什麼現在要開。我們要知道的不是 JD 上的文字，而是這個人進來要解決什麼問題。",
+            "en": "We start by listening: the state of the business, how the team is built, and why this role exists now. What we need is not the wording of a JD — it is the problem this hire is supposed to solve."
+          },
+          "outs": [
+            {
+              "zh": "對業務現況與用人問題的共同理解",
+              "en": "A shared picture of the business and the problem this hire solves"
+            },
+            {
+              "zh": "對可行性的誠實回饋",
+              "en": "Honest feedback on feasibility — before anything starts"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "職缺對焦 PPC",
+            "en": "Position Check (PPC)"
+          },
+          "title": {
+            "zh": "職缺對焦 PPC（Position Check）",
+            "en": "Position Check (PPC)"
+          },
+          "body": {
+            "zh": "把職缺拆解到可以執行：缺的是什麼樣的人才、必備條件與加分條件、面試流程（幾輪、誰面）、期望到職時間、薪酬帶寬與人才特質。對焦完成後，雙方對「要找誰」有同一份答案。",
+            "en": "We break the role down until it is actionable: the capability that is actually missing, must-haves versus nice-to-haves, the interview process (how many rounds, with whom), the target start date, the salary band and the traits that matter. When PPC is done, both sides hold the same answer to \"who are we looking for\"."
+          },
+          "outs": [
+            {
+              "zh": "雙方確認的職缺需求書（Position Brief）",
+              "en": "A written position brief both sides sign off"
+            },
+            {
+              "zh": "面試流程、到職時程與薪酬帶寬達成共識",
+              "en": "Interview rounds, target start date and salary band agreed"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "人才尋訪",
+            "en": "Search & shortlist"
+          },
+          "title": {
+            "zh": "人才尋訪與推薦",
+            "en": "Search and shortlist"
+          },
+          "body": {
+            "zh": "顧問下場執行：先做目標公司與職稱的人才地圖，再直接接觸符合條件的被動人才。每位人選都經顧問親自深談，確認能力、動機與到職可行性後，附書面評估推薦給你，並定期回報進度與市場觀察。此步驟與第四步並行。",
+            "en": "Our consultants go to work: we map talent across target companies and titles, then approach qualified passive candidates directly. Every candidate is interviewed in depth by a consultant — capability, motivation and practical availability — before being presented with a written assessment. You get regular progress updates and market observations along the way. This step runs in parallel with step four."
+          },
+          "outs": [
+            {
+              "zh": "目標公司與職稱的人才地圖",
+              "en": "A talent map of target companies and titles"
+            },
+            {
+              "zh": "附書面評估的推薦名單",
+              "en": "A shortlist with written consultant assessments"
+            },
+            {
+              "zh": "定期進度回報與市場觀察",
+              "en": "Regular progress reports and market observations"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "合作條件",
+            "en": "Commercial agreement"
+          },
+          "title": {
+            "zh": "合作條件討論",
+            "en": "Commercial agreement"
+          },
+          "body": {
+            "zh": "通常先以合作備忘錄（MOU）確認合作意向，正式合約於成案時簽署；在此之前，專案以人力資源市場蒐集與調查顧問的形式進行，由 HiReKing 以顧問方名義為貴公司執行尋訪。此階段確認：階梯式專案費率、保證期、遞補承諾與最低專案費用（依合約約定）。專案費用於人選實際到職後才開立請款單。",
+            "en": "We usually begin with a memorandum of understanding (MOU); the formal agreement is signed when the engagement closes. Until then, the project runs as an HR market research and advisory engagement — HiReKing approaches the market in its own name as your consulting partner. At this stage we settle the tiered project fee, the guarantee period, the replacement commitment and the minimum project fee (as agreed in contract). The project fee is invoiced only after the candidate actually starts work."
+          },
+          "outs": [
+            {
+              "zh": "MOU 先行，成案時簽正式合約",
+              "en": "MOU to start; formal agreement signed at close"
+            },
+            {
+              "zh": "階梯式專案費率、保證期與遞補承諾確認",
+              "en": "Tiered project fee, guarantee period and replacement terms settled"
+            },
+            {
+              "zh": "到職後才請款，尋訪期間零預付",
+              "en": "Invoiced only after onboarding — nothing paid up front"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "專案啟動",
+            "en": "Kick-off & delivery"
+          },
+          "title": {
+            "zh": "專案啟動與執行",
+            "en": "Kick-off and delivery"
+          },
+          "body": {
+            "zh": "成立兩個專屬群組：一個處理商務面——合約、請款與合作項目細節；另一個是專案群組，由負責的顧問進駐，安排面試、同步回饋、推進每一個職缺的進度，直到人選報到與保證期結束。",
+            "en": "We set up two dedicated groups. One handles the commercial side — agreement, invoicing and cooperation details. The other is the project group, where the assigned consultants sit: scheduling interviews, relaying feedback and driving every role forward until the candidate starts and the guarantee period closes."
+          },
+          "outs": [
+            {
+              "zh": "商務群組：合約、請款與合作細節",
+              "en": "A commercial group for agreement, invoicing and cooperation details"
+            },
+            {
+              "zh": "專案群組：顧問進駐推進每個職缺",
+              "en": "A project group where assigned consultants drive every role"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "soft": true,
+      "eyebrow": {
+        "zh": "商務條件",
+        "en": "Commercial terms"
+      },
+      "title": {
+        "zh": "專案費率對照表",
+        "en": "Project fee schedule"
+      },
+      "body": {
+        "zh": "專案費用依人選首年薪資總額（含底薪、獎金估值、固定津貼）以階梯費率計算。人選到職當日才開立請款單，於收到通知後 30 日內付款。",
+        "en": "The project fee is calculated on the candidate's first-year total compensation (base salary, bonus estimate and fixed allowances) at tiered rates. The invoice is issued only on the day the candidate starts, payable within 30 days."
+      },
+      "columns": [
+        {
+          "zh": "首年薪資總額 (TWD)",
+          "en": "First-year compensation (TWD)"
+        },
+        {
+          "zh": "專案費率",
+          "en": "Project fee"
+        },
+        {
+          "zh": "保證期",
+          "en": "Guarantee period"
+        }
+      ],
+      "rows": [
+        [
+          {
+            "zh": "1,249,999 以下",
+            "en": "Up to 1,249,999"
+          },
+          "20%",
+          {
+            "zh": "30 天",
+            "en": "30 days"
+          }
+        ],
+        [
+          {
+            "zh": "1,250,000 – 1,749,999",
+            "en": "1,250,000 – 1,749,999"
+          },
+          "25%",
+          {
+            "zh": "60 天",
+            "en": "60 days"
+          }
+        ],
+        [
+          {
+            "zh": "1,750,000 以上",
+            "en": "1,750,000 and above"
+          },
+          "30%",
+          {
+            "zh": "90 天",
+            "en": "90 days"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": {
+        "zh": "保障機制",
+        "en": "Protections"
+      },
+      "title": {
+        "zh": "到職後，我們的責任還沒結束",
+        "en": "Our responsibility does not end on day one"
+      },
+      "body": {
+        "zh": "人選於保證期內離任或不適任時，請於 7 日內以書面通知，我們將依原職位需求立即啟動遞補尋訪。若未能於保證期內覓得替補人選，提供原專案費用 20% 的折讓額度供日後合作扣抵。",
+        "en": "If a placement departs or proves unsuitable within the guarantee period, notify us in writing within seven days and we immediately restart the search against the original brief. If no replacement is found within the guarantee period, we issue a credit of 20% of the original project fee against future engagements."
+      },
+      "panel": {
+        "title": {
+          "zh": "付款與其他條件",
+          "en": "Payment and other terms"
+        },
+        "items": [
+          {
+            "zh": "人選實際到職後才開立請款單——尋訪期間不預收任何費用。",
+            "en": "Invoiced only after the candidate starts — nothing is charged up front during the search."
+          },
+          {
+            "zh": "最低專案費用依雙方合約約定。",
+            "en": "A minimum project fee applies, as agreed in the contract."
+          },
+          {
+            "zh": "雙方互負保密義務，人選資訊未經書面同意不對外揭露。",
+            "en": "Mutual confidentiality: candidate information is never disclosed without written consent."
+          },
+          {
+            "zh": "本頁內容為說明用途，實際條款以雙方正式簽署之合約為準。",
+            "en": "This page is for reference; the terms that govern are those of the signed agreement."
+          }
+        ]
+      }
+    }
+  ]
+}

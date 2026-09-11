@@ -89,3 +89,63 @@
     el.textContent = new Date().getFullYear();
   });
 })();
+
+/* ---- interactive engagement flow (/process/) ---- */
+(function () {
+  'use strict';
+  document.querySelectorAll('.flow').forEach(function (flow) {
+    var nodes = Array.prototype.slice.call(flow.querySelectorAll('.flow__node'));
+    var cards = Array.prototype.slice.call(flow.querySelectorAll('.flow__card'));
+    var fill = flow.querySelector('.flow__fill');
+    var track = flow.querySelector('.flow__track');
+    var prev = flow.querySelector('.flow__prev');
+    var next = flow.querySelector('.flow__next');
+    var now = flow.querySelector('.flow__now');
+    if (!nodes.length || !cards.length) return;
+    var cur = 0;
+
+    function fillTo(i) {
+      if (!fill || !track) return;
+      var vertical = window.matchMedia('(max-width:860px)').matches;
+      var dot = nodes[i].querySelector('.flow__dot');
+      var tr = track.getBoundingClientRect();
+      var dr = dot.getBoundingClientRect();
+      if (vertical) {
+        var pctV = ((dr.top + dr.height / 2 - tr.top) / tr.height) * 100;
+        fill.style.setProperty('--fillv', Math.max(0, Math.min(100, pctV)) + '%');
+      } else {
+        var line = flow.querySelector('.flow__line').getBoundingClientRect();
+        var pct = ((dr.left + dr.width / 2 - line.left) / line.width) * 100;
+        fill.style.width = Math.max(0, Math.min(100, pct)) + '%';
+      }
+    }
+
+    function go(i, focusCard) {
+      cur = Math.max(0, Math.min(nodes.length - 1, i));
+      nodes.forEach(function (n, j) {
+        n.classList.toggle('is-active', j === cur);
+        n.classList.toggle('is-done', j < cur);
+        n.setAttribute('aria-selected', j === cur ? 'true' : 'false');
+      });
+      cards.forEach(function (c, j) { c.hidden = j !== cur; });
+      if (now) now.textContent = ('0' + (cur + 1)).slice(-2);
+      if (prev) prev.disabled = cur === 0;
+      if (next) next.disabled = cur === nodes.length - 1;
+      fillTo(cur);
+      if (focusCard) cards[cur].focus({ preventScroll: true });
+    }
+
+    nodes.forEach(function (n) {
+      n.addEventListener('click', function () { go(parseInt(n.dataset.step, 10)); });
+    });
+    if (prev) prev.addEventListener('click', function () { go(cur - 1); });
+    if (next) next.addEventListener('click', function () { go(cur + 1); });
+    flow.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(cur + 1); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(cur - 1); }
+    });
+    window.addEventListener('resize', function () { fillTo(cur); });
+    /* first paint after fonts/layout settle */
+    setTimeout(function () { go(0); }, 60);
+  });
+})();

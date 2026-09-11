@@ -48,6 +48,13 @@
     },
     {
       "label": {
+        "zh": "合作流程",
+        "en": "Process"
+      },
+      "href": "/process/"
+    },
+    {
+      "label": {
         "zh": "招募服務",
         "en": "Recruitment"
       },
@@ -228,6 +235,13 @@
               "en": "About us"
             },
             "href": "/about/"
+          },
+          {
+            "label": {
+              "zh": "合作流程",
+              "en": "Engagement Process"
+            },
+            "href": "/process/"
           },
           {
             "label": {

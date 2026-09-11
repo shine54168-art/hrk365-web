@@ -364,8 +364,71 @@ def b_cta(b, lang, cfg):
     return h + '<div class="btn-row">%s</div></div></div></section>' % row
 
 
+def b_flow(b, lang, cfg):
+    """Interactive engagement-flow diagram: clickable nodes + detail card."""
+    items = b["items"]
+    par = set(b.get("parallel", []))  # indices (0-based) rendered as a parallel pair
+    h = section_open(b) + head(b, lang)
+    h += '<div class="flow" data-reveal>'
+    # --- node track ---
+    h += '<div class="flow__track" role="tablist" aria-label="Engagement steps">'
+    h += '<div class="flow__line" aria-hidden="true"><span class="flow__fill"></span></div>'
+
+    def node(i, it):
+        active = ' is-active' if i == 0 else ''
+        return ('<button class="flow__node%s" role="tab" data-step="%d" '
+                'aria-selected="%s" id="flowtab-%d" aria-controls="flowcard-%d">'
+                '<span class="flow__dot"><span>%02d</span></span>'
+                '<span class="flow__label">%s</span></button>'
+                % (active, i, "true" if i == 0 else "false", i, i, i + 1,
+                   esc(t(it["label"], lang))))
+
+    i = 0
+    while i < len(items):
+        if i in par:
+            h += '<div class="flow__pair">'
+            h += ('<span class="flow__pairtag">%s</span>'
+                  % ("並行進行" if lang == "zh" else "in parallel"))
+            while i < len(items) and i in par:
+                h += node(i, items[i])
+                i += 1
+            h += "</div>"
+        else:
+            h += node(i, items[i])
+            i += 1
+    h += "</div>"
+    # --- detail cards ---
+    h += '<div class="flow__panel">'
+    for i, it in enumerate(items):
+        hidden = "" if i == 0 else " hidden"
+        h += ('<article class="flow__card" role="tabpanel" id="flowcard-%d" '
+              'aria-labelledby="flowtab-%d" tabindex="-1"%s>' % (i, i, hidden))
+        h += ('<span class="flow__kicker">%s %02d / %02d</span>'
+              % ("步驟" if lang == "zh" else "Step", i + 1, len(items)))
+        h += "<h3>%s</h3>" % t(it["title"], lang)
+        h += "<p>%s</p>" % t(it["body"], lang)
+        if it.get("outs"):
+            h += ('<h4 class="flow__outs-title">%s</h4>'
+                  % ("這一步你會得到" if lang == "zh" else "What you get"))
+            h += '<ul class="flow__outs">%s</ul>' % "".join(
+                "<li>%s%s</li>" % (TICK, t(o, lang)) for o in it["outs"])
+        h += "</article>"
+    nxt = "下一步" if lang == "zh" else "Next"
+    prv = "上一步" if lang == "zh" else "Back"
+    h += ('<div class="flow__ctrls">'
+          '<button class="flow__btn flow__prev" type="button" aria-label="%s">'
+          '<span aria-hidden="true">&larr;</span> %s</button>'
+          '<span class="flow__count"><span class="flow__now">01</span> / %02d</span>'
+          '<button class="flow__btn flow__next" type="button" aria-label="%s">'
+          '%s <span aria-hidden="true">&rarr;</span></button></div>'
+          % (prv, prv, len(items), nxt, nxt))
+    h += "</div></div>"
+    return h + SECTION_CLOSE
+
+
 BLOCKS = {
     "hero": b_hero, "pagehero": b_pagehero, "cards": b_cards, "split": b_split,
+    "flow": b_flow,
     "steps": b_steps, "stats": b_stats, "table": b_table, "faq": b_faq,
     "quotes": b_quotes, "logos": b_logos, "posts": b_posts, "rich": b_rich,
     "contact": b_contact, "cta": b_cta,
