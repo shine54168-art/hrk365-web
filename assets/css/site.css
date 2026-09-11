@@ -109,7 +109,7 @@ ul{margin:0;padding:0;list-style:none}
 .footer .logo__mark{height:44px}
 .logo__text{display:flex;flex-direction:column;line-height:1.1}
 .logo__name{font-family:var(--display);font-weight:600;font-size:1.34rem;color:var(--ink);letter-spacing:.01em}
-.logo__sub{font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.logo__sub{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;max-width:48ch;line-height:1.35}
 .nav__links{display:flex;align-items:center;gap:4px;margin-left:auto}
 .nav__links>li{position:relative}
 .nav__links>li>a{

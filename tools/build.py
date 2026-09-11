@@ -23,8 +23,9 @@ from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "_src")
-LANGS = ("zh", "en")
+LANGS = ("en",)          # zh content is archived in _src JSON; only English is published
 HTML_LANG = {"zh": "zh-Hant", "en": "en"}
+NAV_TAGLINE = "Comprehensive HR Consulting &amp; Strategic Workforce Solutions across APAC."
 
 
 # ---------------------------------------------------------------- helpers
@@ -36,9 +37,7 @@ def t(val, lang):
 
 
 def url(href, lang):
-    if not href.startswith("/"):
-        return href
-    return href if lang == "zh" else ("/en" + href)
+    return href
 
 
 def esc(s):
@@ -81,6 +80,9 @@ def btn(cta, lang, default="btn--primary"):
 
 
 def btn_row(ctas, lang, default="btn--primary"):
+    # Contact channels are withheld until engagements close, so the contact
+    # page is gone — drop every CTA that pointed at it.
+    ctas = [c for c in (ctas or []) if c.get("href") != "/contact/"]
     if not ctas:
         return ""
     out = []
@@ -378,8 +380,7 @@ def render_nav(cfg, lang, alt_href):
     h += ('<a class="logo" href="%s"><img class="logo__mark" src="%s" alt="" width="38" height="45">'
           '<span class="logo__text"><span class="logo__name">%s</span>'
           '<span class="logo__sub">%s</span></span></a>'
-          % (url("/", lang), esc(b["logo"]), esc(b["name"]),
-             "Talent &amp; HR" if lang == "en" else "獵才顧問"))
+          % (url("/", lang), esc(b["logo"]), esc(b["name"]), NAV_TAGLINE))
     h += '<ul class="nav__links">'
     for item in cfg["nav"]:
         sub = item.get("children")
@@ -392,10 +393,6 @@ def render_nav(cfg, lang, alt_href):
         h += "</li>"
     h += "</ul>"
     h += '<div class="nav__actions">'
-    h += '<a class="langbtn" href="%s" hreflang="%s">%s</a>' % (
-        esc(alt_href), "en" if lang == "zh" else "zh-Hant", "EN" if lang == "zh" else "中文")
-    h += '<a class="btn btn--primary nav__cta" href="%s">%s</a>' % (
-        esc(url("/contact/", lang)), "預約諮詢" if lang == "zh" else "Talk to us")
     h += ('<button class="burger" type="button" aria-label="Menu" aria-expanded="false">'
           "<span></span><span></span><span></span></button>")
     h += "</div></div>"
@@ -407,10 +404,6 @@ def render_nav(cfg, lang, alt_href):
             h += '<div class="sub">%s</div>' % "".join(
                 '<a href="%s">%s</a>' % (esc(url(s["href"], lang)), esc(t(s["label"], lang)))
                 for s in item["children"])
-    h += '<a href="%s">%s</a>' % (esc(url("/contact/", lang)),
-                                  "聯絡我們" if lang == "zh" else "Contact")
-    h += '<a class="btn btn--primary" href="%s">%s</a>' % (
-        esc(url("/contact/", lang)), "預約諮詢" if lang == "zh" else "Talk to us")
     h += "</div></nav>"
     return h
 
@@ -430,20 +423,19 @@ def render_footer(cfg, lang):
           '<span class="logo__sub">%s</span></span></a>'
           % (url("/", lang), esc(b["logo"]), esc(b["name"]), esc(t(b["tagline"], lang))))
     h += '<p class="footer__about">%s</p>' % about
-    h += '<p class="footer__about"><a href="mailto:%s">%s</a><a href="tel:%s">%s</a></p>' % (
-        esc(c["email"]), esc(c["email"]), esc(c["phone_href"]), esc(c["phone_display"]))
     h += "</div>"
     for col in cfg["footer"]["columns"]:
+        links = [l for l in col["links"] if l.get("href") != "/contact/"]
+        if not links:
+            continue
         h += "<div><h4>%s</h4>" % esc(t(col["title"], lang))
-        for l in col["links"]:
+        for l in links:
             h += '<a href="%s">%s</a>' % (esc(url(l["href"], lang)), esc(t(l["label"], lang)))
         h += "</div>"
     h += "</div>"
-    h += ('<div class="footer__meta"><span>&copy; <span class="js-year">%s</span> %s. %s</span>'
-          "<span>%s</span></div>"
+    h += ('<div class="footer__meta"><span>&copy; <span class="js-year">%s</span> %s. %s</span></div>'
           % (date.today().year, esc(b["name"]),
-             "All rights reserved." if lang == "en" else "版權所有。",
-             esc(t(b["licence"], lang))))
+             "All rights reserved." if lang == "en" else "版權所有。"))
     return h + "</div></footer>"
 
 
@@ -455,9 +447,6 @@ BASE = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">
-<link rel="alternate" hreflang="zh-Hant" href="{alt_zh}">
-<link rel="alternate" hreflang="en" href="{alt_en}">
-<link rel="alternate" hreflang="x-default" href="{alt_en}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HRK365">
 <meta property="og:title" content="{title}">
@@ -487,14 +476,12 @@ BASE = """<!DOCTYPE html>
 
 
 def org_jsonld(cfg):
-    b, c = cfg["brand"], cfg["contact"]
+    b = cfg["brand"]
     data = {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": b["name"],
         "url": b["base_url"],
-        "email": c["email"],
-        "telephone": c["phone_display"],
         "areaServed": cfg["markets"]["en"],
         "description": "Cross-border recruitment and HR consulting for employers in "
                        "Taiwan and Southeast Asia.",
@@ -518,28 +505,41 @@ def faq_jsonld(page, lang):
 
 # ---------------------------------------------------------------- build
 NOT_FOUND = """<!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>找不到這個頁面 | HRK365</title>
+<title>Page not found | HRK365</title>
 <meta name="robots" content="noindex">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
 <main id="main">
 <header class="hero hero--page"><div class="wrap">
 <span class="eyebrow">404</span>
-<h1>這個頁面不存在</h1>
-<p class="hero__sub">網址可能已經變更，或是連結有誤。<br><span lang="en">This page does not exist. The address may have changed, or the link is broken.</span></p>
+<h1>This page does not exist</h1>
+<p class="hero__sub">The address may have changed, or the link is broken.</p>
 <div class="btn-row">
-<a class="btn btn--primary" href="/">回到首頁 <span class="arrow">&rarr;</span></a>
-<a class="btn btn--onDark" href="/contact/">聯絡我們 <span class="arrow">&rarr;</span></a>
+<a class="btn btn--primary" href="/">Back to home <span class="arrow">&rarr;</span></a>
 </div>
 </div></header>
 </main>
 </body>
+</html>
+"""
+
+
+REDIRECT = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={target}">
+<link rel="canonical" href="{canonical}">
+<title>Redirecting&hellip;</title>
+</head>
+<body><p><a href="{target}">Continue to {target}</a></p></body>
 </html>
 """
 
@@ -553,11 +553,20 @@ def build():
             pages.append(json.load(open(os.path.join(SRC, "pages", fn), encoding="utf-8")))
     pages.sort(key=lambda p: (p["slug"].count("/"), p["slug"]))
 
+    # Contact details are withheld until engagements close — no contact page.
+    pages = [p for p in pages if p["slug"].strip("/") != "contact"]
+
+    # Clear trees from the old bilingual build.
+    for stale in ("en", "contact"):
+        shutil.rmtree(os.path.join(ROOT, stale), ignore_errors=True)
+
     written = []
+    slugs = []
     for page in pages:
         slug = page["slug"].strip("/")
+        slugs.append(slug)
         for lang in LANGS:
-            rel = ("" if lang == "zh" else "en/") + (slug + "/" if slug else "")
+            rel = slug + "/" if slug else ""
             out_dir = os.path.join(ROOT, rel)
             os.makedirs(out_dir, exist_ok=True)
             canonical = base_url + "/" + rel
@@ -566,7 +575,9 @@ def build():
             alt_href = ("/en/" + (slug + "/" if slug else "")) if lang == "zh" \
                 else ("/" + (slug + "/" if slug else ""))
 
-            body = "".join(BLOCKS[b["type"]](b, lang, cfg) for b in page["blocks"])
+            body = "".join(BLOCKS[b["type"]](b, lang, cfg)
+                           for b in page["blocks"]
+                           if b["type"] not in ("cta", "contact"))
             og = cfg["brand"].get("og_image", "")
             og_tag = ('<meta property="og:image" content="%s%s">\n' % (base_url, og)) \
                 if og and os.path.exists(os.path.join(ROOT, og.lstrip("/"))) else ""
@@ -584,6 +595,20 @@ def build():
             with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
                 f.write(html)
             written.append(canonical)
+
+    # Redirect stubs for the old /en/... and /contact/ URLs.
+    for slug in slugs:
+        rel = slug + "/" if slug else ""
+        stub_dir = os.path.join(ROOT, "en", rel)
+        os.makedirs(stub_dir, exist_ok=True)
+        target = "/" + rel
+        with open(os.path.join(stub_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(REDIRECT.format(target=target, canonical=base_url + target))
+    for old in ("contact/", "en/contact/"):
+        stub_dir = os.path.join(ROOT, old)
+        os.makedirs(stub_dir, exist_ok=True)
+        with open(os.path.join(stub_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(REDIRECT.format(target="/", canonical=base_url + "/"))
 
     # sitemap + robots
     urls = "".join(
